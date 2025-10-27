@@ -1,106 +1,133 @@
+# CLAUDE.md
 
-Default to using Bun instead of Node.js.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-- Use `bun <file>` instead of `node <file>` or `ts-node <file>`
-- Use `bun test` instead of `jest` or `vitest`
-- Use `bun build <file.html|file.ts|file.css>` instead of `webpack` or `esbuild`
-- Use `bun install` instead of `npm install` or `yarn install` or `pnpm install`
-- Use `bun run <script>` instead of `npm run <script>` or `yarn run <script>` or `pnpm run <script>`
-- Bun automatically loads .env, so don't use dotenv.
+## Project Overview
 
-## APIs
+**TecnoShared Gestión Web** is a billing/invoicing management system built with Bun, React 19, and Tailwind CSS. The application manages invoices (facturas), credit notes (notas de crédito), sales notes (notas de venta), and reports for accounting purposes.
 
-- `Bun.serve()` supports WebSockets, HTTPS, and routes. Don't use `express`.
-- `bun:sqlite` for SQLite. Don't use `better-sqlite3`.
-- `Bun.redis` for Redis. Don't use `ioredis`.
-- `Bun.sql` for Postgres. Don't use `pg` or `postgres.js`.
-- `WebSocket` is built-in. Don't use `ws`.
-- Prefer `Bun.file` over `node:fs`'s readFile/writeFile
-- Bun.$`ls` instead of execa.
+## Development Commands
+
+```bash
+# Install dependencies
+bun install
+
+# Start development server with hot module reloading
+bun dev
+
+# Production server
+bun start
+
+# Build for production (includes custom build script)
+bun run build.ts
+
+# Build with custom options (see build.ts --help for full list)
+bun run build.ts --outdir=dist --minify --sourcemap=linked
+```
+
+## Tech Stack & Runtime
+
+- **Runtime**: Bun (not Node.js)
+- **Frontend**: React 19 with TypeScript
+- **Routing**: Wouter (lightweight client-side router)
+- **Styling**: Tailwind CSS 4.x with custom theme via bun-plugin-tailwind
+- **Icons**: Material Symbols Outlined (Google Fonts)
+- **Server**: Bun.serve() with native routes and HMR support
+
+### Bun-Specific Guidelines
+
+- Use `Bun.serve()` for HTTP server (NOT Express)
+- Use `bun:sqlite` for SQLite (NOT better-sqlite3)
+- Use `Bun.redis` for Redis (NOT ioredis)
+- Use `Bun.sql` for Postgres (NOT pg or postgres.js)
+- Use `Bun.file` instead of `node:fs` readFile/writeFile
+- Use `Bun.$\`command\`` for shell commands instead of execa
+- Bun automatically loads `.env` files (no dotenv package needed)
+- WebSocket is built-in (don't use ws package)
+
+## Architecture
+
+### Server Architecture (src/index.ts)
+
+The server uses Bun's native routing system:
+- Serves `src/index.html` for all unmatched routes (SPA fallback)
+- API routes are defined using object notation with HTTP method handlers
+- HMR (Hot Module Reloading) enabled in development
+- Browser console logs echoed to server in development
+
+### Frontend Architecture
+
+**Entry Flow**: `src/index.html` → `src/frontend.tsx` → `src/App.tsx`
+
+- **src/index.html**: HTML entry point with inline Tailwind config and Material Symbols font
+- **src/frontend.tsx**: React 19 DOM root initialization, waits for DOMContentLoaded
+- **src/App.tsx**: Main application with routing and page components
+
+**Component Structure**:
+- `Sidebar`: Navigation sidebar with Material icons, shared across all pages
+- `BillingPage`: Main invoicing page with stats cards and invoice table
+- `ReportsPage`: Reports page (currently showing placeholder UI)
+- `StatsCard`: Reusable stat display component
+- `InvoiceRow`: Table row component for invoices
+
+**Routing**: Uses Wouter for client-side routing with two main routes:
+- `/` - BillingPage (Facturación)
+- `/reportes` - ReportsPage
+
+### TypeScript Configuration
+
+- Path alias: `@/*` maps to `./src/*`
+- Module system: Preserve (bundler mode)
+- JSX: react-jsx (React 19 automatic runtime)
+- Strict mode enabled with additional strict flags
+- No emit (bundling handled by Bun)
+
+### Build System (build.ts)
+
+Custom build script using Bun.build with:
+- Automatic HTML entry point detection via Glob
+- Tailwind CSS processing via bun-plugin-tailwind
+- CLI argument parsing for build configuration
+- Production defaults: minification, linked sourcemaps, browser target
+- Environment: Sets `process.env.NODE_ENV` to "production"
+
+**CLI options** (run `bun run build.ts --help`):
+- `--outdir`, `--minify`, `--sourcemap`, `--target`, `--format`, `--splitting`, `--external`, etc.
+
+### Styling
+
+Custom Tailwind theme defined in `src/index.html`:
+- **Primary color**: `#1173d4`
+- **Dark mode**: Class-based with custom background colors
+- **Fonts**: Inter (Google Fonts)
+- **Icons**: Material Symbols Outlined
+
+## Application Domain
+
+The system manages:
+- **Facturas** (Invoices) with folio, client, date, amount, and status (Pagada/Pendiente/Vencida)
+- **Notas de Crédito** (Credit notes) - UI only
+- **Notas de Venta** (Sales notes) - UI only
+- **Reportes** (Reports) - planned feature for sales by location
+
+## When Adding Features
+
+1. **API Routes**: Add to `src/index.ts` using Bun.serve routes object
+2. **Pages**: Add components to `App.tsx` and routes to Wouter Router
+3. **Navigation**: Update `Sidebar` component with new links
+4. **Styling**: Follow existing Tailwind + dark mode pattern
+5. **Icons**: Use Material Symbols Outlined class names
 
 ## Testing
 
-Use `bun test` to run tests.
+Use `bun test` for testing:
 
-```ts#index.test.ts
+```ts
 import { test, expect } from "bun:test";
 
-test("hello world", () => {
+test("example", () => {
   expect(1).toBe(1);
 });
 ```
 
-## Frontend
-
-Use HTML imports with `Bun.serve()`. Don't use `vite`. HTML imports fully support React, CSS, Tailwind.
-
-Server:
-
-```ts#index.ts
-import index from "./index.html"
-
-Bun.serve({
-  routes: {
-    "/": index,
-    "/api/users/:id": {
-      GET: (req) => {
-        return new Response(JSON.stringify({ id: req.params.id }));
-      },
-    },
-  },
-  // optional websocket support
-  websocket: {
-    open: (ws) => {
-      ws.send("Hello, world!");
-    },
-    message: (ws, message) => {
-      ws.send(message);
-    },
-    close: (ws) => {
-      // handle close
-    }
-  },
-  development: {
-    hmr: true,
-    console: true,
-  }
-})
-```
-
-HTML files can import .tsx, .jsx or .js files directly and Bun's bundler will transpile & bundle automatically. `<link>` tags can point to stylesheets and Bun's CSS bundler will bundle.
-
-```html#index.html
-<html>
-  <body>
-    <h1>Hello, world!</h1>
-    <script type="module" src="./frontend.tsx"></script>
-  </body>
-</html>
-```
-
-With the following `frontend.tsx`:
-
-```tsx#frontend.tsx
-import React from "react";
-
-// import .css files directly and it works
-import './index.css';
-
-import { createRoot } from "react-dom/client";
-
-const root = createRoot(document.body);
-
-export default function Frontend() {
-  return <h1>Hello, world!</h1>;
-}
-
-root.render(<Frontend />);
-```
-
-Then, run index.ts
-
-```sh
-bun --hot ./index.ts
-```
-
-For more information, read the Bun API docs in `node_modules/bun-types/docs/**.md`.
+No test files currently exist in the codebase.
