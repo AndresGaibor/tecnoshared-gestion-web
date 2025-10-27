@@ -54,24 +54,36 @@ function SalesTrendChart() {
 // Sales by Location Component
 function SalesByLocation() {
   const locations = [
-    { name: 'Centro', amount: '$8,450.75', percentage: 100 },
-    { name: 'Mall', amount: '$6,820.50', percentage: 80 },
-    { name: 'Universidad', amount: '$5,240.30', percentage: 62 },
-    { name: 'Playa', amount: '$7,680.90', percentage: 91 },
-    { name: 'Casco Antiguo', amount: '$4,125.60', percentage: 49 },
+    { name: 'Centro', amount: '$8,450.75', percentage: 100, color: '#1173d4' },
+    { name: 'Mall', amount: '$6,820.50', percentage: 80, color: '#3B82F6' },
+    { name: 'Universidad', amount: '$5,240.30', percentage: 62, color: '#6366F1' },
+    { name: 'Playa', amount: '$7,680.90', percentage: 91, color: '#10B981' },
+    { name: 'Casco Antiguo', amount: '$4,125.60', percentage: 49, color: '#8B5CF6' },
   ];
 
   return (
     <div className="lg:col-span-3 flex flex-col gap-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 p-6">
       <p className="text-[#111418] dark:text-white text-lg font-semibold leading-normal">Ventas por Local</p>
-      <div className="space-y-4">
+      <div className="space-y-5">
         {locations.map((location, index) => (
-          <div key={index} className="grid grid-cols-4 items-center gap-4">
-            <p className="col-span-1 text-sm font-medium text-[#6B7280] dark:text-gray-400">{location.name}</p>
-            <div className="col-span-3 h-8 rounded-lg bg-primary/20 flex items-center" style={{ width: `${location.percentage}%` }}>
-              <div className="h-full rounded-lg bg-primary" style={{ width: '100%' }}></div>
+          <div key={index} className="space-y-1">
+            <div className="flex justify-between items-center">
+              <p className="text-sm font-medium text-[#6B7280] dark:text-gray-400">{location.name}</p>
+              <p className="text-sm font-bold text-[#111418] dark:text-white">{location.amount}</p>
             </div>
-            <p className="col-start-2 col-span-3 text-sm font-semibold text-[#111418] dark:text-white -mt-7 ml-2">{location.amount}</p>
+            <div className="w-full h-8 rounded-lg bg-gray-200 dark:bg-gray-700 flex items-center overflow-hidden">
+              <div
+                className="h-full rounded-lg flex items-center justify-end pr-3"
+                style={{
+                  width: `${location.percentage}%`,
+                  backgroundColor: location.color
+                }}
+              >
+                {location.percentage > 30 && (
+                  <span className="text-xs font-semibold text-white">{location.amount}</span>
+                )}
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -82,11 +94,11 @@ function SalesByLocation() {
 // Top Selling Items Component
 function TopSellingItems() {
   const items = [
-    { name: 'Ceviche Mixto', color: '#4F46E5', percentage: '28%' },
-    { name: 'Arroz con Mariscos', color: '#3B82F6', percentage: '22%' },
-    { name: 'Langostinos al Ajillo', color: '#10B981', percentage: '18%' },
-    { name: 'Cazuela de Mariscos', color: '#F59E0B', percentage: '16%' },
-    { name: 'Otros', color: '#EF4444', percentage: '16%' },
+    { name: 'Ceviche Mixto', color: '#1173d4', percentage: '28%' },
+    { name: 'Arroz con Mariscos', color: '#10B981', percentage: '22%' },
+    { name: 'Langostinos al Ajillo', color: '#F59E0B', percentage: '18%' },
+    { name: 'Cazuela de Mariscos', color: '#8B5CF6', percentage: '16%' },
+    { name: 'Otros', color: '#6B7280', percentage: '16%' },
   ];
 
   return (
@@ -95,11 +107,11 @@ function TopSellingItems() {
       <div className="flex items-center justify-center flex-1 my-4">
         <div className="relative w-48 h-48">
           <svg className="w-full h-full" viewBox="0 0 36 36">
-            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#4F46E5" strokeDasharray="28 100" strokeDashoffset="0" strokeWidth="4"></circle>
-            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#3B82F6" strokeDasharray="22 100" strokeDashoffset="-28" strokeWidth="4"></circle>
-            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#10B981" strokeDasharray="18 100" strokeDashoffset="-50" strokeWidth="4"></circle>
-            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#F59E0B" strokeDasharray="16 100" strokeDashoffset="-68" strokeWidth="4"></circle>
-            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#EF4444" strokeDasharray="16 100" strokeDashoffset="-84" strokeWidth="4"></circle>
+            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#1173d4" strokeDasharray="28 100" strokeDashoffset="0" strokeWidth="4"></circle>
+            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#10B981" strokeDasharray="22 100" strokeDashoffset="-28" strokeWidth="4"></circle>
+            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#F59E0B" strokeDasharray="18 100" strokeDashoffset="-50" strokeWidth="4"></circle>
+            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#8B5CF6" strokeDasharray="16 100" strokeDashoffset="-68" strokeWidth="4"></circle>
+            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#6B7280" strokeDasharray="16 100" strokeDashoffset="-84" strokeWidth="4"></circle>
           </svg>
         </div>
       </div>
@@ -118,13 +130,13 @@ function TopSellingItems() {
 // Sales by Day of Week Component
 function SalesByDayOfWeek() {
   const days = [
-    { day: 'Lun', height: '60%' },
-    { day: 'Mar', height: '75%' },
-    { day: 'Mié', height: '70%' },
-    { day: 'Jue', height: '85%' },
-    { day: 'Vie', height: '100%' },
-    { day: 'Sáb', height: '95%' },
-    { day: 'Dom', height: '80%' },
+    { day: 'Lun', height: '60%', color: '#3B82F6' },
+    { day: 'Mar', height: '75%', color: '#10B981' },
+    { day: 'Mié', height: '70%', color: '#6366F1' },
+    { day: 'Jue', height: '85%', color: '#F59E0B' },
+    { day: 'Vie', height: '100%', color: '#1173d4' },
+    { day: 'Sáb', height: '95%', color: '#8B5CF6' },
+    { day: 'Dom', height: '80%', color: '#10B981' },
   ];
 
   return (
@@ -133,8 +145,14 @@ function SalesByDayOfWeek() {
       <div className="grid grid-cols-7 gap-4 pt-4 min-h-[200px] items-end">
         {days.map((day, index) => (
           <div key={index} className="flex flex-col items-center gap-2">
-            <div className="w-full h-24 bg-primary/20 rounded-lg">
-              <div className="w-full bg-primary rounded-lg" style={{ height: day.height }}></div>
+            <div className="w-full h-24 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-end overflow-hidden">
+              <div
+                className="w-full rounded-lg transition-all duration-300 hover:opacity-80"
+                style={{
+                  height: day.height,
+                  backgroundColor: day.color
+                }}
+              ></div>
             </div>
             <p className="text-xs font-bold text-[#6B7280] dark:text-gray-400 uppercase">{day.day}</p>
           </div>
