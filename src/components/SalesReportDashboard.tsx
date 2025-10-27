@@ -130,24 +130,25 @@ function TopSellingItems() {
 // Sales by Day of Week Component
 function SalesByDayOfWeek() {
   const days = [
-    { day: 'Lun', height: '60%', color: '#3B82F6' },
-    { day: 'Mar', height: '75%', color: '#10B981' },
-    { day: 'Mié', height: '70%', color: '#6366F1' },
-    { day: 'Jue', height: '85%', color: '#F59E0B' },
-    { day: 'Vie', height: '100%', color: '#1173d4' },
-    { day: 'Sáb', height: '95%', color: '#8B5CF6' },
-    { day: 'Dom', height: '80%', color: '#10B981' },
+    { day: 'Lun', height: '60%', amount: '$3,450', color: '#3B82F6' },
+    { day: 'Mar', height: '75%', amount: '$4,280', color: '#10B981' },
+    { day: 'Mié', height: '70%', amount: '$3,920', color: '#6366F1' },
+    { day: 'Jue', height: '85%', amount: '$4,850', color: '#F59E0B' },
+    { day: 'Vie', height: '100%', amount: '$5,680', color: '#1173d4' },
+    { day: 'Sáb', height: '95%', amount: '$5,420', color: '#8B5CF6' },
+    { day: 'Dom', height: '80%', amount: '$4,715', color: '#10B981' },
   ];
 
   return (
     <div className="flex flex-col gap-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50 p-6">
       <p className="text-[#111418] dark:text-white text-lg font-semibold leading-normal">Ventas por Día de la Semana</p>
-      <div className="grid grid-cols-7 gap-4 pt-4 min-h-[200px] items-end">
+      <div className="grid grid-cols-7 gap-3 pt-4 min-h-[200px] items-end">
         {days.map((day, index) => (
           <div key={index} className="flex flex-col items-center gap-2">
-            <div className="w-full h-24 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-end overflow-hidden">
+            <p className="text-xs font-bold text-[#111418] dark:text-white mb-1">{day.amount}</p>
+            <div className="w-full h-32 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-end overflow-hidden">
               <div
-                className="w-full rounded-lg transition-all duration-300 hover:opacity-80"
+                className="w-full rounded-lg transition-all duration-300 hover:opacity-80 cursor-pointer"
                 style={{
                   height: day.height,
                   backgroundColor: day.color
