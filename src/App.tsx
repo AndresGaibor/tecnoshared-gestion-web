@@ -1,5 +1,6 @@
 import React from "react";
 import { Router, Route, Link, useLocation } from "wouter";
+import { SalesReportDashboard } from "./components/SalesReportDashboard";
 
 // Sidebar Component
 function Sidebar() {
@@ -36,7 +37,7 @@ function Sidebar() {
           </a>
           <Link
             href="/reportes"
-            className={`flex items-center gap-3 px-3 py-2 rounded-lg ${location === '/reportes' ? 'bg-primary/20 text-primary dark:bg-primary/30' : 'hover:bg-gray-100 dark:hover:bg-gray-800 text-[#1F2937] dark:text-gray-300'}`}
+            className={`flex items-center gap-3 px-3 py-2 rounded-lg ${location === '/reportes' || location === '/reportes/ventas-por-local' ? 'bg-primary/20 text-primary dark:bg-primary/30' : 'hover:bg-gray-100 dark:hover:bg-gray-800 text-[#1F2937] dark:text-gray-300'}`}
           >
             <span className="material-symbols-outlined">leaderboard</span>
             <p className="text-sm font-medium leading-normal">Reportes</p>
@@ -238,13 +239,20 @@ function ReportsPage() {
             <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Tipos de Reportes Disponibles</h2>
             <p className="text-gray-500 dark:text-gray-400 mb-6">Seleccione un tipo de reporte para generar. Próximamente se añadirán más opciones.</p>
             <div className="space-y-4">
-              <a className="flex items-center justify-between w-full px-6 py-4 bg-gray-50 dark:bg-gray-800/60 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
-                <div className="text-left">
-                  <h3 className="font-semibold text-gray-800 dark:text-gray-200">Reportes de Venta por Local</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Analiza las ventas detalladas por cada sucursal.</p>
+              <div className="flex flex-col w-full px-6 py-4 bg-primary/10 dark:bg-primary/20 rounded-lg border border-primary dark:border-primary transition-colors">
+                <div className="flex items-center justify-between w-full mb-2">
+                  <div className="text-left">
+                    <h3 className="font-semibold text-primary dark:text-primary">Reportes de Venta por Local</h3>
+                    <p className="text-sm text-primary/80 dark:text-primary/70">Analiza las ventas detalladas por cada sucursal.</p>
+                  </div>
                 </div>
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">Pendiente</span>
-              </a>
+                <Link href="/reportes/ventas-por-local">
+                  <button className="flex items-center justify-center w-full px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
+                    <span className="material-symbols-outlined text-base">add</span>
+                    <span className="ml-2">Generar Reporte</span>
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
           <div className="mt-8 flex flex-col items-center">
@@ -266,6 +274,7 @@ export function App() {
         <Sidebar />
         <Route path="/" component={BillingPage} />
         <Route path="/reportes" component={ReportsPage} />
+        <Route path="/reportes/ventas-por-local" component={SalesReportDashboard} />
       </div>
     </Router>
   );
