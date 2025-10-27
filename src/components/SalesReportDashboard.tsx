@@ -54,11 +54,11 @@ function SalesTrendChart() {
 // Sales by Location Component
 function SalesByLocation() {
   const locations = [
-    { name: 'Centro', amount: '$45,729.15', percentage: 100 },
-    { name: 'Mall', amount: '$38,109.25', percentage: 85 },
-    { name: 'Universidad', amount: '$30,486.10', percentage: 70 },
-    { name: 'Playa', amount: '$23,550.00', percentage: 55 },
-    { name: 'Casco Antiguo', amount: '$14,556.00', percentage: 40 },
+    { name: 'Centro', amount: '$8,450.75', percentage: 100 },
+    { name: 'Mall', amount: '$6,820.50', percentage: 80 },
+    { name: 'Universidad', amount: '$5,240.30', percentage: 62 },
+    { name: 'Playa', amount: '$7,680.90', percentage: 91 },
+    { name: 'Casco Antiguo', amount: '$4,125.60', percentage: 49 },
   ];
 
   return (
@@ -82,11 +82,11 @@ function SalesByLocation() {
 // Top Selling Items Component
 function TopSellingItems() {
   const items = [
-    { name: 'Producto A', color: '#4F46E5', percentage: '25%' },
-    { name: 'Producto B', color: '#3B82F6', percentage: '20%' },
-    { name: 'Producto C', color: '#10B981', percentage: '18%' },
-    { name: 'Producto D', color: '#F59E0B', percentage: '15%' },
-    { name: 'Otros', color: '#EF4444', percentage: '22%' },
+    { name: 'Ceviche Mixto', color: '#4F46E5', percentage: '28%' },
+    { name: 'Arroz con Mariscos', color: '#3B82F6', percentage: '22%' },
+    { name: 'Langostinos al Ajillo', color: '#10B981', percentage: '18%' },
+    { name: 'Cazuela de Mariscos', color: '#F59E0B', percentage: '16%' },
+    { name: 'Otros', color: '#EF4444', percentage: '16%' },
   ];
 
   return (
@@ -95,11 +95,11 @@ function TopSellingItems() {
       <div className="flex items-center justify-center flex-1 my-4">
         <div className="relative w-48 h-48">
           <svg className="w-full h-full" viewBox="0 0 36 36">
-            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#4F46E5" strokeDasharray="25 100" strokeDashoffset="0" strokeWidth="4"></circle>
-            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#3B82F6" strokeDasharray="20 100" strokeDashoffset="-25" strokeWidth="4"></circle>
-            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#10B981" strokeDasharray="18 100" strokeDashoffset="-45" strokeWidth="4"></circle>
-            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#F59E0B" strokeDasharray="15 100" strokeDashoffset="-63" strokeWidth="4"></circle>
-            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#EF4444" strokeDasharray="22 100" strokeDashoffset="-78" strokeWidth="4"></circle>
+            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#4F46E5" strokeDasharray="28 100" strokeDashoffset="0" strokeWidth="4"></circle>
+            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#3B82F6" strokeDasharray="22 100" strokeDashoffset="-28" strokeWidth="4"></circle>
+            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#10B981" strokeDasharray="18 100" strokeDashoffset="-50" strokeWidth="4"></circle>
+            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#F59E0B" strokeDasharray="16 100" strokeDashoffset="-68" strokeWidth="4"></circle>
+            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#EF4444" strokeDasharray="16 100" strokeDashoffset="-84" strokeWidth="4"></circle>
           </svg>
         </div>
       </div>
@@ -181,15 +181,15 @@ export function SalesReportDashboard() {
           <div className="lg:col-span-1 flex flex-col gap-6">
             <KPICard
               title="Total de Ventas"
-              value="$152,430.50"
-              change="5.2% vs prev. 30 días"
+              value="$32,318.05"
+              change="8.4% vs prev. 30 días"
               isPositive={true}
             />
             <KPICard
               title="Ticket Promedio"
-              value="$35.75"
-              change="-1.8% vs prev. 30 días"
-              isPositive={false}
+              value="$28.50"
+              change="2.3% vs prev. 30 días"
+              isPositive={true}
             />
           </div>
           <SalesTrendChart />
