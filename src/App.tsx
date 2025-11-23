@@ -14,7 +14,7 @@ function Sidebar() {
             style={{backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBp7AZMKP_0QPw0Fudlg5DiL3Xi2iOh1hH0-B-rGYvwLCdFl0-FtCsjeDeFSu0m31oBPcX2_86A11Y4vr-FcQgF69QTPoWdNWasQjy-ETDE6p7uqoSLaLt0mpaimueWp57r3QZLbXZRtBIoUDGbgrtUclzo0uaO_j78ZtesuqZri8nu1p3DLbPlmcWqmliMIVE0sW-Gjd4x0FwmFD7ljnPE_nvnJs_teIVSiUaFzvkpT5okAIhnkEpOwNGwuOcj_0QxMBjAPZJ0E04w")'}}
           />
           <div className="flex flex-col">
-            <h1 className="text-[#111418] dark:text-white text-base font-semibold leading-normal">BillingSys</h1>
+            <h1 className="text-[#111418] dark:text-white text-base font-semibold leading-normal">PATATUKA</h1>
             <p className="text-[#6B7280] dark:text-gray-400 text-sm font-normal leading-normal">Accounting</p>
           </div>
         </div>

@@ -1,4 +1,6 @@
 
+**PATATUKA Gestión Web** is a billing/invoicing management system built with Bun, React 19, and Tailwind CSS.
+
 Default to using Bun instead of Node.js.
 
 - Use `bun <file>` instead of `node <file>` or `ts-node <file>`
