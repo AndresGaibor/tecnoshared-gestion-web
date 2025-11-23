@@ -15,7 +15,7 @@ function Sidebar() {
           />
           <div className="flex flex-col">
             <h1 className="text-[#111418] dark:text-white text-base font-semibold leading-normal">PATATUKA</h1>
-            <p className="text-[#6B7280] dark:text-gray-400 text-sm font-normal leading-normal">Accounting</p>
+            <p className="text-[#6B7280] dark:text-gray-400 text-sm font-normal leading-normal">Contabilidad</p>
           </div>
         </div>
         <nav className="flex flex-col gap-2">
